@@ -1,4 +1,4 @@
-const profile: Profile = {
+const portfolio: Portfolio = {
     'about': {
         'name': 'Mislav Stanić',
         'title': 'Senior Software Engineer',
@@ -71,4 +71,4 @@ const profile: Profile = {
     'contact': "mislav.stanic@hotmail.com"
 }
 
-export default  profile;
+export default portfolio;

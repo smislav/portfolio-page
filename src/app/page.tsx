@@ -1,9 +1,9 @@
 "use client"
-import Particles from "react-particles";
+import Particles from "react-tsparticles";
 import {loadSlim} from "tsparticles-slim";
 import {useCallback} from "react";
 import {Engine} from "tsparticles-engine";
-import profile from "@/app/config/portfolio.config";
+import portfolio from "@/app/config/portfolio.config";
 import {particlesConfig} from "@/app/config/particles.config";
 import Badge from "@/app/components/Badge";
 
@@ -18,12 +18,12 @@ export default function Home() {
                 <div id="aboutPage" className="page flex flex-col min-h-screen items-center justify-center">
                     <div className="lg:w-1/2 p-10">
                         <p className="text-3xl mb-5 text-gray-300">Hi, my name is</p>
-                        <p className="text-5xl mb-5">{profile.about.name}</p>
-                        <p className="text-5xl mb-5 text-gray-500">{profile.about.title}</p>
-                        <p className="text-3xl mb-5 text-gray-500">{profile.about.about}</p>
+                        <p className="text-5xl mb-5">{portfolio.about.name}</p>
+                        <p className="text-5xl mb-5 text-gray-500">{portfolio.about.title}</p>
+                        <p className="text-3xl mb-5 text-gray-500">{portfolio.about.about}</p>
                         <div className="mb-10">
                             {(() => {
-                                return profile.about.skills.map((item) => (
+                                return portfolio.about.skills.map((item: string) => (
                                     <Badge key={item} text={item}/>
                                 ));
                             })()}
@@ -34,7 +34,7 @@ export default function Home() {
                     <div className="lg:w-1/2 p-10">
                         <p className="mb-10 text-5xl">My Education</p>
                         {(() => {
-                            return profile.educations.map((item) => (
+                            return portfolio.educations.map((item: Education) => (
                                 <div className="mb-3" key={item.name}>
                                     <p className="text-xl">{item.startDate + "-" + item.endDate}</p>
                                     <a className="text-3xl underline" href={item.link}>{item.name}</a>
@@ -48,7 +48,7 @@ export default function Home() {
                     <div className="lg:w-1/2 p-10">
                         <p className="mb-5 text-5xl">{"Where I've worked"}</p>
                         {(() => {
-                            return profile.experience.map((item) => (
+                            return portfolio.experience.map((item: Experience) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <div className="mb-3">
                                     <p className="text-xl">{item.startDate + "-" + item.endDate}</p>
@@ -63,7 +63,7 @@ export default function Home() {
                     <div className="lg:w-1/2 p-10">
                         <p className="mb-5 text-5xl">{"What I've built"}</p>
                         {(() => {
-                            return profile.projects.map((item) => (
+                            return portfolio.projects.map((item: Project) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <div className="mb-3">
                                     <a className="text-3xl underline" href={item.link}>{item.name}</a>
@@ -77,7 +77,7 @@ export default function Home() {
                     <div className="lg:w-1/2 p-10">
                         <p className="mb-5 text-5xl">My Certificates</p>
                         {(() => {
-                            return profile.certificates.map((item) => (
+                            return portfolio.certificates.map((item: Certificate) => (
                                 // eslint-disable-next-line react/jsx-key
                                 <div className="mb-3">
                                     <p className="text-xl">{item.date}</p>
@@ -91,7 +91,7 @@ export default function Home() {
                 <div id="contactPage" className="page flex flex-col h-screen items-center justify-center">
                     <div className="lg:w-1/2 p-10">
                         <p className="mb-5 text-5xl"></p>
-                        <a href={`mailto:${profile.contact}`} className="text-5xl underline">Send me a message →</a>
+                        <a href={`mailto:${portfolio.contact}`} className="text-5xl underline">Send me a message →</a>
                     </div>
                 </div>
             </main>

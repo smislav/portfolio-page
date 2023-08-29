@@ -34,7 +34,7 @@ interface Certificate {
     link: string;
 }
 
-interface Profile {
+interface Portfolio {
     about: About;
     educations: Array<Education>;
     experience: Array<Experience>;
