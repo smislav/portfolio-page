@@ -35,7 +35,7 @@ export default function Home() {
                         <p className="mb-10 text-5xl">My Education</p>
                         {(() => {
                             return portfolio.educations.map((item: Education) => (
-                                <div className="mb-3" key={item.name}>
+                                <div key={item.name} className="mb-3">
                                     <p className="text-xl">{item.startDate + "-" + item.endDate}</p>
                                     <a className="text-3xl underline" href={item.link}>{item.name}</a>
                                     <p className="text-3xl text-gray-500">{item.desc}</p>
@@ -49,8 +49,7 @@ export default function Home() {
                         <p className="mb-5 text-5xl">{"Where I've worked"}</p>
                         {(() => {
                             return portfolio.experience.map((item: Experience) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <div className="mb-3">
+                                <div key={item.name} className="mb-3">
                                     <p className="text-xl">{item.startDate + "-" + item.endDate}</p>
                                     <a className="text-3xl underline" href={item.link}>{item.name}</a>
                                     <p className="text-3xl text-gray-500">{item.desc}</p>
@@ -64,8 +63,7 @@ export default function Home() {
                         <p className="mb-5 text-5xl">{"What I've built"}</p>
                         {(() => {
                             return portfolio.projects.map((item: Project) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <div className="mb-3">
+                                <div key={item.name} className="mb-3">
                                     <a className="text-3xl underline" href={item.link}>{item.name}</a>
                                     <p className="text-3xl text-gray-500">{item.desc}</p>
                                 </div>
@@ -78,8 +76,7 @@ export default function Home() {
                         <p className="mb-5 text-5xl">My Certificates</p>
                         {(() => {
                             return portfolio.certificates.map((item: Certificate) => (
-                                // eslint-disable-next-line react/jsx-key
-                                <div className="mb-3">
+                                <div key={item.name} className="mb-3">
                                     <p className="text-xl">{item.date}</p>
                                     <a className="text-3xl underline" href={item.link}>{item.name}</a>
                                     <p className="text-3xl text-gray-500">{item.desc}</p>
