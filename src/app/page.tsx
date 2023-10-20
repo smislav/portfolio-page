@@ -1,98 +1,138 @@
 "use client"
-import Particles from "react-tsparticles";
-import {loadSlim} from "tsparticles-slim";
-import {useCallback} from "react";
-import {Engine} from "tsparticles-engine";
-import portfolio from "@/app/config/portfolio.config";
-import {particlesConfig} from "@/app/config/particles.config";
-import Badge from "@/app/components/Badge";
 
-export default function Home() {
-    const particlesInit = useCallback(async (engine: Engine) => {
-        await loadSlim(engine);
-    }, []);
+import portfolio from "@/app/config/portfolio.config";
+import TextSecondary from "@/app/components/Text/TextSecondary";
+import TextPrimary from "@/app/components/Text/TextPrimary";
+import Badge from "@/app/components/Badge/Badge";
+import Link from "@/app/components/Link/Link";
+import {Page} from "@/app/components/Page/Page";
+import MenuItem from "@/app/components/MenuItem/MenuItem";
+import {isEmail, isURL} from "@/app/utils/Utils";
+
+export default function Portfolio() {
+
+    const isAboutAdded = Boolean(portfolio?.about);
+    const isEducationAdded = Boolean(portfolio?.education);
+    const isExperienceAdded = Boolean(portfolio?.experience);
+    const isProjectsAdded = Boolean(portfolio?.projects);
+    const isCertificatesAdded = Boolean(portfolio?.certificates);
+    const isContactAdded = Boolean(portfolio?.contact);
+
+    const onContactClick = () => {
+        const contact = portfolio?.contact?.contact ?? "";
+        if (isEmail(contact)) {
+            window.location.href = `mailto:${contact}`;
+        }
+        if (isURL(contact)) {
+            window.open(contact, '_blank');
+        }
+    }
 
     return (
-        <div>
-            <main className="absolute flex flex-col min-h-screen lex-col">
-                <div id="aboutPage" className="page flex flex-col min-h-screen items-center justify-center">
-                    <div className="lg:w-1/2 p-10">
-                        <p className="text-3xl mb-5 text-gray-300">Hi, my name is</p>
-                        <p className="text-5xl mb-5">{portfolio.about.name}</p>
-                        <p className="text-5xl mb-5 text-gray-500">{portfolio.about.title}</p>
-                        <p className="text-3xl mb-5 text-gray-500">{portfolio.about.about}</p>
+        <Page className={"flex flex-col justify-center items-center px-10"}>
+            <div className="flex flex-col min-h-screen w-full lg:w-1/2">
+                {isAboutAdded &&
+                    <div id="about" className="flex flex-col min-h-screen justify-center">
+                        <div id="navigation" className="flex flex-row justify-between items-center mb-14">
+                            <TextPrimary
+                                className={"text-xl font-bold hidden md:block"}>{"Portfolio"}</TextPrimary>
+                            <div className="flex">
+                                {isExperienceAdded && <MenuItem onClick={() => {
+                                    window.location.hash = "";
+                                    window.location.hash = "experience";
+                                }} text={"Experience"}/>}
+                                {isProjectsAdded && <MenuItem onClick={() => {
+                                    window.location.hash = "";
+                                    window.location.hash = "projects";
+                                }} text={"Projects"}/>}
+                                {isEducationAdded && <MenuItem onClick={() => {
+                                    window.location.hash = "";
+                                    window.location.hash = "education";
+                                }} text={"Education"}/>}
+                                {isContactAdded && <MenuItem onClick={() => {
+                                    window.location.hash = "";
+                                    window.location.hash = "contact";
+                                }} text={"Contact"}/>}
+                            </div>
+                        </div>
+                        <div className={"flex flex-row mb-5 items-center "}>
+                            <div>
+                                <TextSecondary className="text-3xl mb-3">{"Hi, my name is"}</TextSecondary>
+                                <TextPrimary className="text-5xl mb-3">{portfolio.about?.name}</TextPrimary>
+                                <TextSecondary className="text-3xl mb-3">{portfolio.about?.title}</TextSecondary>
+                            </div>
+                            {portfolio.about?.photo && <img className={"rounded-full w-32 h-32 ml-5 border-8 border-accent"} src={portfolio.about?.photo}/>}
+                        </div>
+                        <TextSecondary
+                            className="text-3xl mb-5">{portfolio.about?.about}</TextSecondary>
                         <div className="mb-10">
                             {(() => {
-                                return portfolio.about.skills.map((item: string) => (
+                                return portfolio.about?.skills?.split(",").map((item: string) => (
                                     <Badge key={item} text={item}/>
                                 ));
                             })()}
                         </div>
-                    </div>
-                </div>
-                <div id="educationPage" className="page flex flex-col h-screen items-center justify-center">
-                    <div className="lg:w-1/2 p-10">
-                        <p className="mb-10 text-5xl">My Education</p>
+                    </div>}
+                {isExperienceAdded &&
+                    <div id="experience" className="flex flex-col min-h-screen justify-center py-32">
+                        <TextPrimary className="mb-5 text-5xl">{"Where I've worked"}</TextPrimary>
                         {(() => {
-                            return portfolio.educations.map((item: Education) => (
+                            return portfolio.experience?.map((item: Experience) => (
                                 <div key={item.name} className="mb-3">
-                                    <p className="text-xl">{item.startDate + "-" + item.endDate}</p>
-                                    <a className="text-3xl underline" href={item.link}>{item.name}</a>
-                                    <p className="text-3xl text-gray-500">{item.desc}</p>
+                                    <TextSecondary
+                                        className="text-xl">{item.startDate + "-" + item.endDate}</TextSecondary>
+                                    <Link className="text-3xl" href={item.link}>{item.name}</Link>
+                                    <TextSecondary className="text-3xl mt-3">{item.desc}</TextSecondary>
                                 </div>
                             ));
                         })()}
-                    </div>
-                </div>
-                <div id="experiencePage" className="page flex flex-col min-h-screen items-center justify-center">
-                    <div className="lg:w-1/2 p-10">
-                        <p className="mb-5 text-5xl">{"Where I've worked"}</p>
+                    </div>}
+                {isProjectsAdded &&
+                    <div id="projects" className="flex flex-col min-h-screen justify-center py-32">
+                        <TextPrimary className="mb-5 text-5xl">{"Personal projects"}</TextPrimary>
                         {(() => {
-                            return portfolio.experience.map((item: Experience) => (
+                            return portfolio.projects?.map((item: Project) => (
                                 <div key={item.name} className="mb-3">
-                                    <p className="text-xl">{item.startDate + "-" + item.endDate}</p>
-                                    <a className="text-3xl underline" href={item.link}>{item.name}</a>
-                                    <p className="text-3xl text-gray-500">{item.desc}</p>
+                                    <Link className="text-3xl" href={item.link}>{item.name}</Link>
+                                    <TextSecondary className="text-3xl mt-3">{item.desc}</TextSecondary>
                                 </div>
                             ));
                         })()}
-                    </div>
-                </div>
-                <div id="projectsPage" className="page flex flex-col h-screen items-center justify-center">
-                    <div className="lg:w-1/2 p-10">
-                        <p className="mb-5 text-5xl">{"What I've built"}</p>
+                    </div>}
+                {isEducationAdded &&
+                    <div id="education" className="flex flex-col min-h-screen justify-center py-32">
+                        <TextPrimary className="mb-10 text-5xl">{"My Education"}</TextPrimary>
                         {(() => {
-                            return portfolio.projects.map((item: Project) => (
-                                <div key={item.name} className="mb-3">
-                                    <a className="text-3xl underline" href={item.link}>{item.name}</a>
-                                    <p className="text-3xl text-gray-500">{item.desc}</p>
+                            return portfolio.education?.map((item: Education) => (
+                                <div className="mb-3" key={item.name}>
+                                    <TextSecondary
+                                        className="text-xl">{item.startDate + "-" + item.endDate}</TextSecondary>
+                                    <Link className="text-3xl" href={item.link}>{item.name}</Link>
+                                    <TextSecondary className="text-3xl mt-3">{item.desc}</TextSecondary>
                                 </div>
                             ));
                         })()}
-                    </div>
-                </div>
-                <div id="CertificatesPage" className="page flex flex-col h-screen items-center justify-center">
-                    <div className="lg:w-1/2 p-10">
-                        <p className="mb-5 text-5xl">My Certificates</p>
+                    </div>}
+                {isCertificatesAdded &&
+                    <div id="certificates" className="flex flex-col min-h-screen justify-center py-32">
+                        <TextPrimary className="mb-5 text-5xl">My Certificates</TextPrimary>
                         {(() => {
-                            return portfolio.certificates.map((item: Certificate) => (
+                            return portfolio.certificates?.map((item: Certificate) => (
                                 <div key={item.name} className="mb-3">
-                                    <p className="text-xl">{item.date}</p>
-                                    <a className="text-3xl underline" href={item.link}>{item.name}</a>
-                                    <p className="text-3xl text-gray-500">{item.desc}</p>
+                                    <TextSecondary className="text-xl">{item.date}</TextSecondary>
+                                    <Link className="text-3xl" href={item.link}>{item.name}</Link>
+                                    <TextSecondary className="text-3xl mt-3">{item.desc}</TextSecondary>
                                 </div>
                             ));
                         })()}
-                    </div>
-                </div>
-                <div id="contactPage" className="page flex flex-col h-screen items-center justify-center">
-                    <div className="lg:w-1/2 p-10">
-                        <p className="mb-5 text-5xl"></p>
-                        <a href={`mailto:${portfolio.contact}`} className="text-5xl underline">Send me a message →</a>
-                    </div>
-                </div>
-            </main>
-            <Particles className="absolute" init={particlesInit} options={particlesConfig}/>
-        </div>
+                    </div>}
+                {isContactAdded &&
+                    <div id="contact" className="flex flex-col min-h-screen justify-center py-32">
+                        <TextSecondary
+                            className="mb-5 text-5xl">{"Feel free to reach me, I'm open for collaboration"}</TextSecondary>
+                        <Link onClick={onContactClick} className="text-5xl">Send me a message →</Link>
+                    </div>}
+            </div>
+        </Page>
     )
 }

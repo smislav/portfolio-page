@@ -1,6 +1,6 @@
 ## Portfolio page
 
-My personal portfolio page https://www.mislavstanic.com.
+My personal portfolio page https://www.portfolioo.page/mislavstanic.
 
 This page was built with Next.js as a basic theme in my side project www.portfolioo.page.
 
@@ -11,6 +11,10 @@ Portfolioo is a user-friendly web application tool designed to help individuals 
 Whether you're a developer, designer, writer, artist, or professional from any field, Portfolioo empowers you to showcase your work and achievements in a visually appealing and impactful way.
 
 Visit the website: [https://www.portfolioo.page](https://www.portfolioo.page)
+
+## Requirements
+
+- Node >= 18
 
 ## Forking a repository
 
@@ -34,3 +38,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Configuring portfolio data is as simple as updating configuration file `src/config/portfolio.config.ts`
 
 The user interface is automatically loaded from configuration file.
+
+Accent color is defined the `src/tailwind.config.ts` under `accent` attribute.

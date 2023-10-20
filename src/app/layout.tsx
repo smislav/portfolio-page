@@ -2,11 +2,14 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import portfolio from "@/app/config/portfolio.config";
+import {ThemeModeButton} from "@/app/components/ThemeButton/ThemeModeButton";
 
 const inter = Inter({ subsets: ['latin'] })
 
+const userName = portfolio?.about?.name;
+
 export const metadata: Metadata = {
-  title: portfolio.about.name,
+  title: userName ? `Portfolio | ${userName}` : "Portfolio",
   description: 'Personal portfolio page',
 }
 
@@ -16,8 +19,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="dark">
+      <body className={inter.className + " relative bg-gray-100 dark:bg-gray-900"}>
+        <div className={"z-10 absolute top-10 right-10 "}>
+          <ThemeModeButton/>
+        </div>
+        {children}
+      </body>
     </html>
   )
 }

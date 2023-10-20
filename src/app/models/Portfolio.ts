@@ -1,8 +1,9 @@
 interface About {
     name: string;
+    photo?: string;
     title: string;
     about: string;
-    skills: Array<string>;
+    skills: string;
 }
 
 interface Education {
@@ -34,12 +35,15 @@ interface Certificate {
     link: string;
 }
 
-interface Portfolio {
-    about: About;
-    educations: Array<Education>;
-    experience: Array<Experience>;
-    projects: Array<Project>;
-    certificates: Array<Certificate>;
-    languages?: Array<string>;
+interface Contact {
     contact: string;
+}
+
+interface Portfolio {
+    about: About | null;
+    education: Array<Education> | null;
+    experience: Array<Experience> | null;
+    projects: Array<Project> | null;
+    certificates: Array<Certificate> | null;
+    contact: Contact | null;
 }
