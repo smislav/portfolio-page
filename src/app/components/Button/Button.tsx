@@ -9,11 +9,11 @@ interface Props {
 }
 
 export default function Button({className, children, variant, disabled, onClick}: Props) {
-    const baseStyle = "cursor-pointer px-2 py-2 font-bold disabled:opacity-50 ";
+    const baseStyle = "text-sm sm:text-md cursor-pointer font-bold disabled:opacity-50 whitespace-nowrap ";
     const plainStyle =
-        "bg-transparent hover:bg-accent/10 text-md text-accent dark:text-accent rounded-2xl";
+        "px-2 py-2 bg-transparent hover:bg-accent/10 text-accent dark:text-accent rounded-2xl ";
     const solidStyle =
-        "min-w-min cursor-pointer px-3 py-2 bg-accent hover:bg-accent/90 text-md text-gray-100 dark:text-gray-100 rounded-2xl";
+        "px-2 py-2 bg-accent hover:bg-accent/90 text-gray-100 dark:text-gray-100 rounded-2xl ";
 
     let style = variant === "plain" ? plainStyle : solidStyle;
     style = baseStyle + style + " " + className;

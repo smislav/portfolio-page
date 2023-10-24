@@ -3,5 +3,6 @@ interface Props {
 }
 
 export default function Badge({text}: Props) {
-    return (<div className="inline-block text-md pl-3 pr-3 pt-1 pb-1 bg-accent text-white rounded-2xl mr-3 mb-3">{text}</div>)
+    return (<div
+        className="inline-block text-sm px-3 py-2 bg-accent text-white rounded-2xl mr-3 mb-3">{text}</div>)
 }
